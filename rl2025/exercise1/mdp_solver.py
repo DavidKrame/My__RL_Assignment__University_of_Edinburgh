@@ -86,9 +86,12 @@ class ValueIteration(MDPSolver):
         while True :
             for stat in self.mdp.states :
                 v = V(stat)
-                for n_stat in self.mdp.states:
-                    for act in self.mdp.actions:
-                        V(stat) = self.mdp.P(stat,act,n_stat)*(self.mdp.R(stat,act,n_stat)+self.gamma*V(n_stat))
+                v_max_list = []
+                for act in self.mdp.actions:
+                    for n_stat in self.mdp.states:
+                        V(stat) += self.mdp.P(stat,act,n_stat)*(self.mdp.R(stat,act,n_stat)+self.gamma*V(n_stat))
+                    v_max_list.append(V(stat))
+                V(stat) = max(v_max_list)
                 Delta = max(Delta, abs(V(stat)-v))
             if Delta<theta :
                 break
@@ -114,7 +117,18 @@ class ValueIteration(MDPSolver):
         """
         policy = np.zeros([self.state_dim, self.action_dim])
         ### PUT YOUR CODE HERE ###
-        raise NotImplementedError("Needed for Q1")
+        # raise NotImplementedError("Needed for Q1")
+        
+        for stat in self.mdp.states :
+            v_action_max_list = []
+            for act in self.mdp.actions:
+                for n_stat in self.mdp.states:
+                    V(stat) += self.mdp.P(stat,act,n_stat)*(self.mdp.R(stat,act,n_stat)+self.gamma*V(n_stat))
+                v_action_max_list.append(V(stat))
+            v_action_max_array = np.array(v_action_max_list)
+            best_action = np.argmax(v_action_max_array)
+            policy(stat,best_action) = 1
+        
         return policy
 
     def solve(self, theta: float = 1e-6) -> Tuple[np.ndarray, np.ndarray]:
