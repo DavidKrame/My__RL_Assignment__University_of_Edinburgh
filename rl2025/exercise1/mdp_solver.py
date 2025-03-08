@@ -81,7 +81,18 @@ class ValueIteration(MDPSolver):
         """
         V = np.zeros(self.state_dim)
         ### PUT YOUR CODE HERE ###
-        raise NotImplementedError("Needed for Q1")
+        # raise NotImplementedError("Needed for Q1")
+        Delta = 0
+        while True :
+            for stat in self.mdp.states :
+                v = V(stat)
+                for n_stat in self.mdp.states:
+                    for act in self.mdp.actions:
+                        V(stat) = self.mdp.P(stat,act,n_stat)*(self.mdp.R(stat,act,n_stat)+self.gamma*V(n_stat))
+                Delta = max(Delta, abs(V(stat)-v))
+            if Delta<theta :
+                break
+        
         return V
 
     def _calc_policy(self, V: np.ndarray) -> np.ndarray:
