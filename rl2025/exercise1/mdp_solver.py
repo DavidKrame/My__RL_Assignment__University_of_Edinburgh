@@ -175,7 +175,19 @@ class PolicyIteration(MDPSolver):
         """
         V = np.zeros(self.state_dim)
         ### PUT YOUR CODE HERE ###
-        raise NotImplementedError("Needed for Q1")
+        # raise NotImplementedError("Needed for Q1")
+        import random
+        Delta = 0
+        while True :
+            for stat in self.mdp.states :
+                v = V(stat)
+                for n_stat in self.mdp.states:
+                    act = random.choices(choices=self.mdp.actions, weights=policy[stat,:],k=1)[0]
+                    V(stat) += self.mdp.P(stat,act,n_stat)*(self.mdp.R(stat,act,n_stat)+self.gamma*V(n_stat))
+                Delta = max(Delta, abs(V(stat)-v))
+            if Delta<self.theta :
+                break
+        
         return np.array(V)
 
     def _policy_improvement(self) -> Tuple[np.ndarray, np.ndarray]:
