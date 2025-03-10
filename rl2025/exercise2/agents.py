@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from collections import defaultdict
 import random
+import numpy as np
 from typing import List, Dict, DefaultDict
 from gymnasium.spaces import Space
 from gymnasium.spaces.utils import flatdim
@@ -54,9 +55,17 @@ class Agent(ABC):
         :return (int): index of selected action
         """
         ### PUT YOUR CODE HERE ###
-        raise NotImplementedError("Needed for Q2")
+        # raise NotImplementedError("Needed for Q2")
+        
+        if random.random() <= self.epsilon :
+            # action = random.choices(self.action_space)
+            action = random.randint(0, self.n_acts-1)
+        else:
+            action = np.argmax([self.q_table[(obs, act)] for act in range(self.n_acts)])
+        
         ### RETURN AN ACTION HERE ###
-        return -1
+        # return -1
+        return action
 
     @abstractmethod
     def schedule_hyperparameters(self, timestep: int, max_timestep: int):
