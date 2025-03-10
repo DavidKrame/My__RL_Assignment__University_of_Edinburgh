@@ -82,19 +82,35 @@ class ValueIteration(MDPSolver):
         V = np.zeros(self.state_dim)
         ### PUT YOUR CODE HERE ###
         # raise NotImplementedError("Needed for Q1")
-        Delta = 0
-        while True :
-            for stat in range(self.state_dim) :
-                v = V[stat]
-                v_max_list = []
-                for act in range(self.action_dim):
-                    for n_stat in range(self.state_dim):
-                        V[stat] += self.mdp.P(stat,act,n_stat)*(self.mdp.R(stat,act,n_stat)+self.gamma*V[n_stat])
-                    v_max_list.append(V[stat])
-                V[stat] = max(v_max_list)
-                Delta = max(Delta, abs(V[stat]-v))
-            if Delta<theta :
+        while True:
+            Delta = 0
+            V_prev = V.copy()
+            for s in range(self.state_dim):
+                max_val = -np.inf
+                for a in range(self.action_dim):
+                    action_val = 0.0
+                    for s_next in range(self.state_dim):
+                        action_val += self.mdp.P[s, a, s_next] * (self.mdp.R[s, a, s_next] + self.gamma * V_prev[s_next])
+                    if action_val > max_val:
+                        max_val = action_val
+                Delta = max(Delta, abs(max_val - V_prev[s]))
+                V[s] = max_val
+            if Delta < theta:
                 break
+        
+        # Delta = 0
+        # while True :
+        #     for stat in range(self.state_dim) :
+        #         v = V[stat]
+        #         v_max_list = []
+        #         for act in range(self.action_dim):
+        #             for n_stat in range(self.state_dim):
+        #                 V[stat] += self.mdp.P[stat,act,n_stat]*(self.mdp.R[stat,act,n_stat]+self.gamma*V[n_stat])
+        #             v_max_list.append(V[stat])
+        #         V[stat] = max(v_max_list)
+        #         Delta = max(Delta, abs(V[stat]-v))
+        #     if Delta<theta :
+        #         break
         
         return V
 
@@ -118,16 +134,25 @@ class ValueIteration(MDPSolver):
         policy = np.zeros([self.state_dim, self.action_dim])
         ### PUT YOUR CODE HERE ###
         # raise NotImplementedError("Needed for Q1")
+        for s in range(self.state_dim):
+            action_values = []
+            for a in range(self.action_dim):
+                action_val = 0.0
+                for s_next in range(self.state_dim):
+                    action_val += self.mdp.P[s, a, s_next] * (self.mdp.R[s, a, s_next] + self.gamma * V[s_next])
+                action_values.append(action_val)
+            best_action = np.argmax(action_values)
+            policy[s, best_action] = 1.0
         
-        for stat in range(self.state_dim) :
-            v_action_max_list = []
-            for act in range(self.action_dim):
-                for n_stat in range(self.state_dim):
-                    V[stat] += self.mdp.P(stat,act,n_stat)*(self.mdp.R(stat,act,n_stat)+self.gamma*V[n_stat])
-                v_action_max_list.append(V[stat])
-            v_action_max_array = np.array(v_action_max_list)
-            best_action = np.argmax(v_action_max_array)
-            policy[stat,best_action] = 1
+        # for stat in range(self.state_dim) :
+        #     v_action_max_list = []
+        #     for act in range(self.action_dim):
+        #         for n_stat in range(self.state_dim):
+        #             V[stat] += self.mdp.P[stat,act,n_stat]*(self.mdp.R[stat,act,n_stat]+self.gamma*V[n_stat])
+        #         v_action_max_list.append(V[stat])
+        #     v_action_max_array = np.array(v_action_max_list)
+        #     best_action = np.argmax(v_action_max_array)
+        #     policy[stat,best_action] = 1
         
         return policy
 
@@ -176,16 +201,30 @@ class PolicyIteration(MDPSolver):
         V = np.zeros(self.state_dim)
         ### PUT YOUR CODE HERE ###
         # raise NotImplementedError("Needed for Q1")
-        Delta = 0
-        while True :
-            for stat in range(self.state_dim):
-                v = V[stat]
-                for n_stat in range(self.state_dim):
-                    for act in range(self.action_dim):
-                        V[stat] += policy[stat,act]*self.mdp.P(stat,act,n_stat)*(self.mdp.R(stat,act,n_stat)+self.gamma*V[n_stat])
-                Delta = max(Delta, abs(V[stat]-v))
-            if Delta<self.theta :
+        
+        while True:
+            Delta = 0
+            new_V = np.zeros(self.state_dim)
+            for s in range(self.state_dim):
+                new_val = 0.0
+                for a in range(self.action_dim):
+                    for s_next in range(self.state_dim):
+                        new_val += policy[s, a] * self.mdp.P[s, a, s_next] * (self.mdp.R[s, a, s_next] + self.gamma * V[s_next])
+                Delta = max(Delta, abs(new_val - V[s]))
+                new_V[s] = new_val
+            V = new_V.copy()
+            if Delta < self.theta:
                 break
+        # Delta = 0
+        # while True :
+        #     for stat in range(self.state_dim):
+        #         v = V[stat]
+        #         for n_stat in range(self.state_dim):
+        #             for act in range(self.action_dim):
+        #                 V[stat] += policy[stat,act]*self.mdp.P[stat,act,n_stat]*(self.mdp.R[stat,act,n_stat]+self.gamma*V[n_stat])
+        #         Delta = max(Delta, abs(V[stat]-v))
+        #     if Delta<self.theta :
+        #         break
         
         return np.array(V)
 
@@ -203,7 +242,7 @@ class PolicyIteration(MDPSolver):
             *REMEMBER*: the sum of (STATE, ACTION, :) should be 1.0 (all actions lead somewhere)
             E.g. the transition probability of transition [3] -2-> [4] (going from state 3 to
             state 4 with action 2) can be accessed with `self.P[3, 2, 4]`
-
+            
         :return (Tuple[np.ndarray of float with dim (num of states, num of actions),
                        np.ndarray of float with dim (num of states)):
             Tuple of calculated policy and value function
@@ -216,21 +255,42 @@ class PolicyIteration(MDPSolver):
         for s in range(self.state_dim):
             policy[s, 0] = 1.0
         policy_stable = False
-        while not policy_stable :
-            V = self._policy_eval(policy=policy)
+        while not policy_stable:
+            V = self._policy_eval(policy)
             policy_stable = True
-            for stat in range(self.state_dim) :
-                old_action = np.argmax(policy[stat])
-                v_action_max_list = []
-                for _ in range(self.action_dim):
-                    v_action_max_list.append(V[stat])
-                v_action_max_array = np.array(v_action_max_list)
-                best_action = np.argmax(v_action_max_array)
-                if old_action != best_action :
+            for s in range(self.state_dim):
+                old_action = np.argmax(policy[s])
+                
+                action_values = []
+                for a in range(self.action_dim):
+                    action_val = 0.0
+                    for s_next in range(self.state_dim):
+                        action_val += self.mdp.P[s, a, s_next] * (self.mdp.R[s, a, s_next] + self.gamma * V[s_next])
+                    action_values.append(action_val)
+                best_action = np.argmax(action_values)
+                if best_action != old_action:
                     policy_stable = False
+                # greedy updt
+                policy[s] = 0.0
+                policy[s, best_action] = 1.0
+        # for s in range(self.state_dim):
+        #     policy[s, 0] = 1.0
+        # policy_stable = False
+        # while not policy_stable :
+        #     V = self._policy_eval(policy=policy)
+        #     policy_stable = True
+        #     for stat in range(self.state_dim) :
+        #         old_action = np.argmax(policy[stat])
+        #         v_action_max_list = []
+        #         for _ in range(self.action_dim):
+        #             v_action_max_list.append(V[stat])
+        #         v_action_max_array = np.array(v_action_max_list)
+        #         best_action = np.argmax(v_action_max_array)
+        #         if old_action != best_action :
+        #             policy_stable = False
                     
-                policy[stat] = np.zeros(self.action_dim)
-                policy[stat,best_action] = 1
+        #         policy[stat] = np.zeros(self.action_dim)
+        #         policy[stat,best_action] = 1
         
         return policy, V
 
