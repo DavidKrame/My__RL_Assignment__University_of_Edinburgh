@@ -114,7 +114,16 @@ class QLearningAgent(Agent):
         :return (float): updated Q-value for current observation-action pair
         """
         ### PUT YOUR CODE HERE ###
-        raise NotImplementedError("Needed for Q2")
+        # raise NotImplementedError("Needed for Q2")
+        
+        if done :
+            pass
+        else :
+            # Q_max = self.q_table[(obs, self.n_acts)]
+            Q_max = np.argmax([self.q_table[(obs, act)] for act in range(self.n_acts)])
+            self.q_table[(obs, action)] += self.alpha*(reward + self.gamma*Q_max - \
+                                                                                self.q_table[(obs, action)])
+        
         return self.q_table[(obs, action)]
 
     def schedule_hyperparameters(self, timestep: int, max_timestep: int):
