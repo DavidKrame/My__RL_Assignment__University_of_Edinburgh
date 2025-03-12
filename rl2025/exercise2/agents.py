@@ -115,14 +115,13 @@ class QLearningAgent(Agent):
         """
         ### PUT YOUR CODE HERE ###
         # raise NotImplementedError("Needed for Q2")
-        
+        target = 0
         if done :
-            pass
+            target = reward
         else :
-            # Q_max = self.q_table[(obs, self.n_acts)]
-            Q_max = np.argmax([self.q_table[(obs, act)] for act in range(self.n_acts)])
-            self.q_table[(obs, action)] += self.alpha*(reward + self.gamma*Q_max - \
-                                                                                self.q_table[(obs, action)])
+            Q_max = max([self.q_table[(n_obs, act)] for act in range(self.n_acts)])
+            target = reward + self.gamma*Q_max
+        self.q_table[(obs, action)] += self.alpha * (target - self.q_table[(obs, action)])
         
         return self.q_table[(obs, action)]
 
