@@ -172,7 +172,26 @@ class MonteCarloAgent(Agent):
         """
         updated_values = {}
         ### PUT YOUR CODE HERE ###
-        raise NotImplementedError("Needed for Q2")
+        # raise NotImplementedError("Needed for Q2")
+        
+        T = len(obses)
+        for t in range(T):
+            G = 0
+            discount = 1 # or gmma^0
+            for k in range(t, T):
+                G += discount * rewards[k]
+                discount *= self.gamma
+            state = obses[t]
+            action = actions[t]
+            
+            if (state, action) in self.sa_counts:
+                self.sa_counts[(state, action)] += 1
+            else:
+                self.sa_counts[(state, action)] = 1
+            # Update with .......... New = Old + (1/n)*(Target-Old)
+            self.q_table[(state, action)] += (1/ self.sa_counts[(state, action)]) * (G - self.q_table[(state, action)])
+            updated_values[(state, action)] = self.q_table[(state, action)]
+            
         return updated_values
 
     def schedule_hyperparameters(self, timestep: int, max_timestep: int):
