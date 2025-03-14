@@ -272,8 +272,37 @@ class DQN(Agent):
         :return (Dict[str, float]): dictionary mapping from loss names to loss values
         """
         ### PUT YOUR CODE HERE ###
-        raise NotImplementedError("Needed for Q3")
+        # raise NotImplementedError("Needed for Q3")
+        
+        # Unpack the batch of transitions (s, a, r, d, s')
+        states, actions, rewards, dones, next_states = batch
+        states = torch.FloatTensor(states)
+        actions = torch.LongTensor(actions).unsqueeze(1)
+        rewards = torch.FloatTensor(rewards).unsqueeze(1)
+        dones = torch.FloatTensor(dones).unsqueeze(1)
+        next_states = torch.FloatTensor(next_states)
+        
+        # After these conversion let us compute the current Q-values using critics_net
+        current_q_values = self.critics_net(states)
+        current_q = current_q_values.gather(1, actions)
+        
+        with torch.no_grad():
+            next_q_values = self.critics_target(next_states)
+            max_next_q, _ = next_q_values.max(dim=1, keepdim=True)
+            target_q = rewards + self.gamma * (1 - dones) * max_next_q
+
         q_loss = 0.0
+        loss = torch.mean((current_q - target_q) ** 2)
+        
+        # Backprop step
+        self.critics_optim.zero_grad()
+        loss.backward()
+        self.critics_optim.step()
+
+        self.update_counter += 1
+        if self.update_counter % self.target_update_freq == 0:
+            self.critics_target.load_state_dict(self.critics_net.state_dict())        
+        
         return {"q_loss": q_loss}
 
 
