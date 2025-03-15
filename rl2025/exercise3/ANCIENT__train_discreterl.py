@@ -19,7 +19,8 @@ SWEEP = False # TRUE TO SWEEP OVER POSSIBLE HYPERPARAMETER CONFIGURATIONS
 NUM_SEEDS_SWEEP = 10 # NUMBER OF SEEDS TO USE FOR EACH HYPERPARAMETER CONFIGURATION
 SWEEP_SAVE_RESULTS = True # TRUE TO SAVE SWEEP RESULTS TO A FILE
 SWEEP_SAVE_ALL_WEIGHTS = False # TRUE TO SAVE ALL WEIGHTS FROM EACH SEED
-ENV = "MOUNTAINCAR" # "CARTPOLE" is also possible if you uncomment the corresponding code, but is not assessed here.
+# ENV = "MOUNTAINCAR" # "CARTPOLE" is also possible if you uncomment the corresponding code, but is not assessed here.
+ENV = "CARTPOLE"
 
 ### ASSIGNMENT: CHANGE epsilon_decay_strategy: "constant" TO "linear" OR "exponential" TO ANSWER QUESTIONS 3.2 TO 3.6 IN answer_sheet.py ###
 MOUNTAINCAR_CONFIG = {

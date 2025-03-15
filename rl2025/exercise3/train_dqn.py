@@ -22,7 +22,7 @@ NUM_SEEDS_SWEEP = 10 # NUMBER OF SEEDS TO USE FOR EACH HYPERPARAMETER CONFIGURAT
 SWEEP_SAVE_RESULTS = True # TRUE TO SAVE SWEEP RESULTS TO A FILE
 SWEEP_SAVE_ALL_WEIGHTS = False # TRUE TO SAVE ALL WEIGHTS FROM EACH SEED
 ENV = "MOUNTAINCAR" # "CARTPOLE" is also possible if you uncomment the corresponding code, but is not assessed for DQN.
-
+ENV = "CARTPOLE"
 
 ### ASSIGNMENT: CHANGE epsilon_decay_strategy: "constant" TO "linear" OR "exponential" TO ANSWER QUESTIONS 3.2 TO 3.6 IN answer_sheet.py ###
 MOUNTAINCAR_CONFIG = {
@@ -174,7 +174,7 @@ def train(env: gym.Env, config, output: bool = True) -> Tuple[np.ndarray, np.nda
 
             if timesteps_elapsed % config["eval_freq"] < episode_timesteps:
                 eval_returns = 0
-                if config["env"] == "CartPole-v0" or config["env"] == "MountainCar-v0":
+                if config["env"] == "CartPole-v0" or config["env"] == "CartPole-v1" or config["env"] == "MountainCar-v0":
                     max_steps = config["episode_length"]
                 else:
                     raise ValueError(f"Unknown environment {config['env']}")

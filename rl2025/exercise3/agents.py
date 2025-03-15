@@ -275,16 +275,19 @@ class DQN(Agent):
         ### PUT YOUR CODE HERE ###
         # raise NotImplementedError("Needed for Q3")
         
-        # Unpack the batch of transitions (s, a, r, d, s')
-        states, actions, rewards, dones, next_states = batch
+        # Unpack the batch of transitions : "states", "actions", "next_states", "rewards", "done"
+        states, actions, next_states, rewards, dones  = batch
+        # Conversions
+        # actions = torch.FloatTensor(actions).unsqueeze(1)
         states = torch.FloatTensor(states)
-        actions = torch.LongTensor(actions).unsqueeze(1)
+        actions = torch.FloatTensor(actions)
         rewards = torch.FloatTensor(rewards).unsqueeze(1)
         dones = torch.FloatTensor(dones).unsqueeze(1)
         next_states = torch.FloatTensor(next_states)
         
         # After these conversion let us compute the current Q-values using critics_net
         current_q_values = self.critics_net(states)
+        actions = actions.long()
         current_q = current_q_values.gather(1, actions)
         
         with torch.no_grad():
@@ -425,7 +428,7 @@ class DiscreteRL(Agent):
         # Convert continuous observations to discrete state identifiers
         state = self.discretize_state(obs)         # Current state
         next_state = self.discretize_state(n_obs)   # Next state
-
+        
         ### PUT YOUR CODE HERE ###
         
         # let's compute the max Q-value for next state if the episode is not finished
