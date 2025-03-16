@@ -1,3 +1,6 @@
-# Ignore all __pycache__ directories
+# Ignore all __pycache__ directories and Stored
 __pycache__/
 **/__pycache__/
+
+*.pt
+**/*.pt

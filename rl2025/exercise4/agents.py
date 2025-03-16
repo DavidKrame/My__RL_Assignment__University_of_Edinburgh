@@ -179,7 +179,20 @@ class DDPG(Agent):
         :return (sample from self.action_space): action the agent should perform
         """
         ### PUT YOUR CODE HERE ###
-        raise NotImplementedError("Needed for Q4")
+        # raise NotImplementedError("Needed for Q4")
+        
+        # evaluation mode : THIS eval mode SEEMS TO WORK BUT WHY ????
+        self.actor.eval()
+        obs_tensor = torch.tensor(obs, dtype=torch.float32).unsqueeze(0)
+        with torch.no_grad():
+            action = self.actor(obs_tensor).squeeze(0)
+        if explore:
+            noise = self.noise.sample()
+            action = action + noise
+        # Clip the action to be within the bounds
+        action = torch.clamp(action, self.lower_action_bound, self.upper_action_bound)
+        return action.cpu().numpy()
+
 
     def update(self, batch: Transition) -> Dict[str, float]:
         """Update function for DQN
@@ -194,11 +207,65 @@ class DDPG(Agent):
         :return (Dict[str, float]): dictionary mapping from loss names to loss values
         """
         ### PUT YOUR CODE HERE ###
-        raise NotImplementedError("Needed for Q4")
+        # raise NotImplementedError("Needed for Q4")
+        
+        states, actions, next_states, rewards, dones  = batch
+        # Conversions
+        # actions = torch.FloatTensor(actions).unsqueeze(1)
+        states = torch.tensor(states, dtype=torch.float32)
+        actions = torch.tensor(actions, dtype=torch.float32)
+        rewards = torch.tensor(rewards, dtype=torch.float32).unsqueeze(1)
+        next_states = torch.tensor(next_states, dtype=torch.float32)
+        dones = torch.tensor(dones, dtype=torch.float32).unsqueeze(1)
 
-        q_loss = 0.0
-        p_loss = 0.0
+        # ----- Critic update -----
+        # next actions computation using the target actor network
+        next_actions = self.actor_target(next_states)
+        # next_states and next_actions CONCAT
+        next_inputs = torch.cat([next_states, next_actions], dim=1)
+        # target Q-values from the target critic network
+        with torch.no_grad():
+            target_q_values = self.critic_target(next_inputs)
+        # Compute the target for the critic loss
+        target = rewards + self.gamma * (1 - dones) * target_q_values
+
+        # current Q-values from the critic network
+        current_inputs = torch.cat([states, actions], dim=1)
+        current_q_values = self.critic(current_inputs)
+        q_loss = F.mse_loss(current_q_values, target)  # critic loss (MSE loss)
+
+        self.critic_optim.zero_grad()
+        q_loss.backward()
+        self.critic_optim.step()
+
+        # ----- Actor update -----
+        # actor actions for current states
+        actor_actions = self.actor(states)
+        actor_inputs = torch.cat([states, actor_actions], dim=1)
+        # Evaluation of the Q-value for these actions using the critic network
+        actor_q_values = self.critic(actor_inputs)
+        # Compute the actor loss as the negative mean Q-value
+        p_loss = -actor_q_values.mean()
+
+        self.policy_optim.zero_grad()
+        p_loss.backward()
+        self.policy_optim.step()
+
+        # ----- Soft update of target networks -----
+        for target_param, param in zip(self.actor_target.parameters(), self.actor.parameters()):
+            target_param.data.copy_((1 - self.tau) * target_param.data + self.tau * param.data)
+
+        for target_param, param in zip(self.critic_target.parameters(), self.critic.parameters()):
+            target_param.data.copy_((1 - self.tau) * target_param.data + self.tau * param.data)
+
         return {
-            "q_loss": q_loss,
-            "p_loss": p_loss,
+            "q_loss": q_loss.item(),
+            "p_loss": p_loss.item(),
         }
+
+        # q_loss = 0.0
+        # p_loss = 0.0
+        # return {
+        #     "q_loss": q_loss,
+        #     "p_loss": p_loss,
+        # }
