@@ -118,4 +118,5 @@ def get_best_saved_run(runs:List[Run]) -> Tuple[Run, str]:
         best_run_id = np.argmax(best_run.final_returns)
         return best_run, best_run.agent_weights_filenames[best_run_id]
     else:
-        raise ValueError(f"No saved runs found for highest mean final returns run {best_run.run_name}.")
+        return f"{best_run.final_return_mean} (this is Run: {best_run.run_name})"
+        # raise ValueError(f"No saved runs found for highest mean final returns run {best_run.run_name}.")

@@ -115,9 +115,10 @@ class QLearningAgent(Agent):
         """
         ### PUT YOUR CODE HERE ###
         # raise NotImplementedError("Needed for Q2")
+        
         target = 0
         if done :
-            target = reward
+            target = reward # we are trying to ensure convergence to this at the end
         else :
             Q_max = max([self.q_table[(n_obs, act)] for act in range(self.n_acts)])
             target = reward + self.gamma*Q_max
