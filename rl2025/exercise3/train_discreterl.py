@@ -15,18 +15,19 @@ from rl2025.util.hparam_sweeping import generate_hparam_configs
 from rl2025.util.result_processing import Run
 
 RENDER = False # FALSE FOR FASTER TRAINING / TRUE TO VISUALIZE ENVIRONMENT DURING EVALUATION
-SWEEP = False # TRUE TO SWEEP OVER POSSIBLE HYPERPARAMETER CONFIGURATIONS
+SWEEP = True # TRUE TO SWEEP OVER POSSIBLE HYPERPARAMETER CONFIGURATIONS
 NUM_SEEDS_SWEEP = 10 # NUMBER OF SEEDS TO USE FOR EACH HYPERPARAMETER CONFIGURATION
 SWEEP_SAVE_RESULTS = True # TRUE TO SAVE SWEEP RESULTS TO A FILE
 SWEEP_SAVE_ALL_WEIGHTS = False # TRUE TO SAVE ALL WEIGHTS FROM EACH SEED
-# ENV = "MOUNTAINCAR" # "CARTPOLE" is also possible if you uncomment the corresponding code, but is not assessed here.
-ENV = "CARTPOLE"
-
+ENV = "MOUNTAINCAR" # "CARTPOLE" is also possible if you uncomment the corresponding code, but is not assessed here.
+# ENV = "CARTPOLE"
+################################## THIS IS JUST FOR DISCRETE (WITH 3 lr)
 ### ASSIGNMENT: CHANGE epsilon_decay_strategy: "constant" TO "linear" OR "exponential" TO ANSWER QUESTIONS 3.2 TO 3.6 IN answer_sheet.py ###
 MOUNTAINCAR_CONFIG = {
     "eval_freq": 10000, # HOW OFTEN WE EVALUATE (AND RENDER IF RENDER=TRUE)
     "eval_episodes": 100, # DECREASING THIS MIGHT REDUCE EVALUATION ACCURACY; BUT MAKES IT EASIER TO SEE HOW THE POLICY EVOLVES OVER TIME (BY ENABLING RENDER ABOVE)
-    "learning_rate": 3e-4,
+    # "learning_rate": 0.0, # I SHOULD MODIF THIS BACK
+    # "learning_rate": [2e-2, 2e-3, 2e-4],
     "hidden_size": (64,64),
     "target_update_freq": 2000,
     "batch_size": 64,   # not used here
@@ -41,20 +42,12 @@ MOUNTAINCAR_CONFIG = {
 
 MOUNTAINCAR_CONFIG.update(MOUNTAINCAR_CONSTANTS)
 
-MOUNTAINCAR_HPARAMS_LINEAR_DECAY = {
-    "epsilon_start": [1.0,],
-    "exploration_fraction": [0.99, 0.75, 0.01]
-    }
+MOUNTAINCAR_HPARAMS_CONSTANTS = {
+    "learning_rate": [2e-2, 2e-3, 2e-4]
+}
 
-MOUNTAINCAR_HPARAMS_EXP_DECAY = {
-    "epsilon_start": [1.0, ],
-    "epsilon_decay": [1.0, 0.5, 1e-5]
-    }
-
-if MOUNTAINCAR_CONFIG['epsilon_decay_strategy'] == "linear":
-    MOUNTAINCAR_HPARAMS = MOUNTAINCAR_HPARAMS_LINEAR_DECAY
-elif MOUNTAINCAR_CONFIG['epsilon_decay_strategy'] == "exponential":
-    MOUNTAINCAR_HPARAMS = MOUNTAINCAR_HPARAMS_EXP_DECAY
+if MOUNTAINCAR_CONFIG["epsilon_decay_strategy"] == "constant":
+    MOUNTAINCAR_HPARAMS = MOUNTAINCAR_HPARAMS_CONSTANTS
 else:
     MOUNTAINCAR_HPARAMS = None
 
@@ -72,7 +65,7 @@ CARTPOLE_CONFIG = {
 CARTPOLE_CONFIG.update(CARTPOLE_CONSTANTS)
 
 CARTPOLE_HPARAMS = {
-    "learning_rate": [2e-2, 2e-3, 2e-4],
+    "learning_rate": [2e-4, 2e-2, 2e-3],
     }
 
 SWEEP_RESULTS_FILE_CARTPOLE = "DiscreteRL-CartPole-sweep-results.pkl"

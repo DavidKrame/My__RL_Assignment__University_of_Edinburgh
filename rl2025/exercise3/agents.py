@@ -206,24 +206,41 @@ class DQN(Agent):
 
         def epsilon_linear_decay(*args, **kwargs):
             ### PUT YOUR CODE HERE ###
-            raise(NotImplementedError)
+            # raise(NotImplementedError)
+            decay_steps = self.exploration_fraction * max_timestep
+            if timestep < decay_steps:
+                new_epsilon = self.epsilon_start - (self.epsilon_start - self.epsilon_min) * (timestep / decay_steps)
+            else:
+                new_epsilon = self.epsilon_min
+            return new_epsilon
 
         def epsilon_exponential_decay(*args, **kwargs):
             ### PUT YOUR CODE HERE ###
-            raise(NotImplementedError)
+            # raise(NotImplementedError)
+            ratio = timestep / max_timestep
+            new_epsilon = self.epsilon_start * (self.epsilon_exponential_decay_factor ** ratio)
+            if new_epsilon < self.epsilon_min:
+                new_epsilon = self.epsilon_min
+            return new_epsilon
+        
 
         if self.epsilon_decay_strategy == "constant":
             pass
         elif self.epsilon_decay_strategy == "linear":
             # linear decay
             ### PUT YOUR CODE HERE ###
-            self.epsilon = epsilon_linear_decay(...)
+            # self.epsilon = epsilon_linear_decay(...)
+            self.epsilon = epsilon_linear_decay()
+            
         elif self.epsilon_decay_strategy == "exponential":
             # exponential decay
             ### PUT YOUR CODE HERE ###
-            self.epsilon = epsilon_exponential_decay(...)
+            # self.epsilon = epsilon_exponential_decay(...)
+            self.epsilon = epsilon_exponential_decay()
+            
         else:
             raise ValueError("epsilon_decay_strategy must be either 'constant', 'linear' or 'exponential'")
+
 
     def act(self, obs: np.ndarray, explore: bool):
         """Returns an action (should be called at every timestep)
@@ -317,7 +334,7 @@ class DiscreteRL(Agent):
     
     :attr gamma (float): discount factor for future rewards
     :attr epsilon (float): probability of choosing a random action for exploration
-    :attr alpha (float): learning rate for Q-value updates
+    :attr learning_rate (float): learning rate for Q-value updates
     :attr n_acts (int): number of possible actions in the environment
     :attr q_table (DefaultDict): table storing Q-values for state-action pairs
     :attr position_bins (np.ndarray): bins for discretizing position dimension
@@ -332,8 +349,8 @@ class DiscreteRL(Agent):
         action_space: gym.Space,
         observation_space: gym.Space,
         gamma: float = 0.99,
-        epsilon: float = 0.99,
-        alpha: float = 0.05,
+        epsilon: float = 0.05,
+        learning_rate: float = 2e-4,
         **kwargs
     ):
         """Constructor of DiscreteRL agent
@@ -342,11 +359,11 @@ class DiscreteRL(Agent):
         :param observation_space (gym.Space): environment's observation space
         :param gamma (float): discount factor gamma
         :param epsilon (float): epsilon for epsilon-greedy action selection
-        :param alpha (float): learning rate alpha
+        :param learning_rate (float): learning rate learning_rate
         """
         self.gamma: float = gamma
         self.epsilon: float = epsilon
-        self.alpha: float = alpha
+        self.learning_rate: float = learning_rate
         self.n_acts: int = action_space.n
         
         super().__init__(action_space=action_space, observation_space=observation_space)
@@ -414,7 +431,7 @@ class DiscreteRL(Agent):
          ** YOU NEED TO IMPLEMENT THIS FUNCTION FOR Q3 BUT YOU CAN REUSE YOUR Q LEARNING CODE FROM Q2 (you can include it here or you adapt the files from Q2 to work of the mountain car problem **
 
         Implements the Q-learning update equation:
-        Q(s,a) = Q(s,a) + alpha * (r + gamma * max_a' Q(s',a') - Q(s,a))
+        Q(s,a) = Q(s,a) + learning_rate * (r + gamma * max_a' Q(s',a') - Q(s,a))
 
         :param obs (np.ndarray): current observation state
         :param action (int): applied action
@@ -430,16 +447,16 @@ class DiscreteRL(Agent):
         next_state = self.discretize_state(n_obs)   # Next state
         
         ### PUT YOUR CODE HERE ###
-        
-        # let's compute the max Q-value for next state if the episode is not finished
-        max_next_q = 0.0
-        if not done:
-            max_next_q = max([self.q_table[(next_state, a)] for a in range(self.n_acts)])
-
-        # update
+        # Same as in Q2
+        target = 0
+        if done :
+            target = reward # we are trying to ensure convergence to this at the end
+        else :
+            Q_max = max([self.q_table[(next_state, a)] for a in range(self.n_acts)])
+            target = reward + self.gamma*Q_max
         current_q = self.q_table[(state, action)]
-        self.q_table[(state, action)] = current_q + self.alpha * (reward + self.gamma * max_next_q - current_q)
-
+        self.q_table[(state, action)] = current_q + self.learning_rate * (target - current_q)
+        
         return {f"Q_value_{state}" : self.q_table[(state, action)]}
 
 
@@ -454,8 +471,9 @@ class DiscreteRL(Agent):
         :param timestep (int): current timestep at the beginning of the episode
         :param max_timestep (int): maximum timesteps that the training loop will run for
         """
-        decay_progress = min(1.0, timestep / (0.20 * max_timestep))
-        self.epsilon = 1.0 - decay_progress * 0.99  # Decays from 1.0 to 0.01
+        # decay_progress = min(1.0, timestep / (0.20 * max_timestep))
+        # self.epsilon = 1.0 - decay_progress * 0.99  # Decays from 1.0 to 0.01
+        pass
 
 
 # class DiscreteRL(Agent):
