@@ -18,15 +18,15 @@ from rl2025.util.hparam_sweeping import generate_hparam_configs
 from rl2025.util.result_processing import Run
 
 RENDER = False # FALSE FOR FASTER TRAINING / TRUE TO VISUALIZE ENVIRONMENT DURING EVALUATION
-SWEEP = False # TRUE TO SWEEP OVER POSSIBLE HYPERPARAMETER CONFIGURATIONS
+SWEEP = True # TRUE TO SWEEP OVER POSSIBLE HYPERPARAMETER CONFIGURATIONS
 NUM_SEEDS_SWEEP = 10 # NUMBER OF SEEDS TO USE FOR EACH HYPERPARAMETER CONFIGURATION
 SWEEP_SAVE_RESULTS = True # TRUE TO SAVE SWEEP RESULTS TO A FILE
 SWEEP_SAVE_ALL_WEIGTHS = False # TRUE TO SAVE ALL WEIGHTS FROM EACH SEED
 ENV = "RACETRACK"
 
 RACETRACK_CONFIG = {
-    "critic_hidden_size": [32, 32, 32],
-    "policy_hidden_size": [32, 32, 32],
+    "critic_hidden_size": [32, 64, 32],
+    "policy_hidden_size": [32, 64, 32],
 }
 RACETRACK_CONFIG.update(RACETRACK_CONSTANTS)
 
@@ -182,7 +182,42 @@ def train(env: gym.Env, env_eval: gym.Env, config: Dict, output: bool = True) ->
 if __name__ == "__main__":
     if ENV == "RACETRACK":
         CONFIG = RACETRACK_CONFIG
-        HPARAMS_SWEEP = None # Not required for assignment
+        # HPARAMS_SWEEP = None # Not required for assignment
+        # HPARAMS_SWEEP = {
+        #     "critic_hidden_size": [[32, 64, 32], [64, 128, 64]],
+        #     "policy_hidden_size": [[32, 64, 32], [128, 256, 128], [32, 256, 32], [64, 256, 64]],
+        # }
+        
+        # HPARAMS_SWEEP = {
+        #     "critic_hidden_size": [
+        #         [32, 64, 32],
+        #         [32, 128, 32],
+        #         [64, 128, 64]
+        #     ],
+        #     "policy_hidden_size": [
+        #         [128, 256, 128],
+        #         [128, 256, 256, 128],
+        #         [64, 256, 64]
+        #     ]
+        # }
+
+        # OVERNIGHT
+        HPARAMS_SWEEP = {
+            "critic_hidden_size": [
+                [32, 64, 32],
+                [16, 32, 32, 32, 16]
+            ],
+            "policy_hidden_size": [
+                [32, 64, 64, 32],
+                [32, 64, 128, 64, 32],
+                [32, 64, 128, 256, 512, 256, 128, 64],
+                [256, 512, 256],
+                [256, 512, 512, 256],
+                [64, 128, 128, 128, 128, 64],
+                [32, 64, 64, 32]
+            ]
+        }
+
         SWEEP_RESULTS_FILE = None # Not required for assignment
     else:
         raise(ValueError(f"Unknown environment {ENV}"))
@@ -191,7 +226,7 @@ if __name__ == "__main__":
     env_eval = gym.make(CONFIG["env"])
 
     if SWEEP and HPARAMS_SWEEP is not None:
-        qqq
+        # qqq
         config_list, swept_params = generate_hparam_configs(CONFIG, HPARAMS_SWEEP)
         results = []
         for config in config_list:
@@ -204,7 +239,7 @@ if __name__ == "__main__":
                 run_save_filename = '--'.join([run.config["algo"], run.config["env"], hparams_values, str(i)])
                 if SWEEP_SAVE_ALL_WEIGTHS:
                     run.set_save_filename(run_save_filename)
-                eval_returns, eval_timesteps, times, run_data = train(env, run.config, output=False)
+                eval_returns, eval_timesteps, times, run_data = train(env, env_eval, run.config, output=False)
                 run.update(eval_returns, eval_timesteps, times, run_data)
             results.append(copy.deepcopy(run))
             print(f"Finished run with hyperparameters {hparams_values}. "

@@ -1,0 +1,177 @@
+
+Starting new run...
+
+Training iteration: 1/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:57, 26.03it/s]              1501it [01:10, 26.03it/s]1501it [02:40,  9.33it/s]
+Saving to:  racetrack_latest.pt
+
+Training iteration: 2/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:55, 26.91it/s]              1501it [01:09, 26.91it/s]1501it [02:09, 11.61it/s]
+
+Training iteration: 3/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:56, 26.53it/s]              1501it [01:10, 26.53it/s]1501it [02:11, 11.40it/s]
+
+Training iteration: 4/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:58, 25.63it/s]              1501it [01:08, 25.63it/s]1501it [03:11,  7.84it/s]
+
+Training iteration: 5/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:55, 26.98it/s]              1501it [01:07, 26.98it/s]1501it [02:02, 12.27it/s]
+
+Training iteration: 6/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:55, 27.16it/s]              1501it [01:05, 27.16it/s]1501it [02:46,  9.01it/s]
+
+Training iteration: 7/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:55, 27.10it/s]              1501it [01:09, 27.10it/s]1501it [02:09, 11.55it/s]
+
+Training iteration: 8/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:55, 27.20it/s]              1501it [01:09, 27.20it/s]1501it [03:20,  7.49it/s]
+
+Training iteration: 9/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:55, 26.84it/s]              1501it [01:09, 26.84it/s]1501it [03:59,  6.26it/s]
+
+Training iteration: 10/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:56, 26.64it/s]              1501it [01:10, 26.64it/s]1501it [02:08, 11.67it/s]
+Finished run with hyperparameters critic_hidden_size:[32, 64, 32]_policy_hidden_size:[128, 256, 128]. Mean final score: 160.5013471251526 +- 17.512376542701
+
+Starting new run...
+
+Training iteration: 1/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:58, 25.75it/s]              1501it [01:11, 25.75it/s]1501it [04:01,  6.20it/s]
+Saving to:  racetrack_latest.pt
+
+Training iteration: 2/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [01:00, 24.89it/s]              1501it [01:20, 24.89it/s]1501it [03:32,  7.07it/s]
+
+Training iteration: 3/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:59, 25.44it/s]              1501it [01:18, 25.44it/s]1501it [03:37,  6.91it/s]
+
+Training iteration: 4/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:58, 25.80it/s]              1501it [01:11, 25.80it/s]1501it [03:29,  7.18it/s]
+
+Training iteration: 5/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:59, 25.30it/s]              1501it [01:12, 25.30it/s]1501it [02:29, 10.01it/s]
+
+Training iteration: 6/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:36, 40.82it/s]              1501it [00:52, 40.82it/s]1501it [01:04, 23.34it/s]
+
+Training iteration: 7/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:38, 39.44it/s]              1501it [00:48, 39.44it/s]1501it [00:59, 25.31it/s]
+
+Training iteration: 8/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:38, 39.00it/s]              1501it [00:49, 39.00it/s]1501it [02:41,  9.31it/s]
+
+Training iteration: 9/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:38, 38.50it/s]              1501it [00:58, 38.50it/s]1501it [01:54, 13.11it/s]
+
+Training iteration: 10/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:38, 38.93it/s]              1501it [00:53, 38.93it/s]1501it [02:18, 10.84it/s]
+Finished run with hyperparameters critic_hidden_size:[32, 64, 32]_policy_hidden_size:[128, 256, 256, 128]. Mean final score: 202.11348486424296 +- 24.597325398527275
+
+Starting new run...
+
+Training iteration: 1/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:36, 40.80it/s]              1501it [00:55, 40.80it/s]1501it [01:03, 23.66it/s]
+Saving to:  racetrack_latest.pt
+
+Training iteration: 2/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:38, 39.06it/s]              1501it [00:52, 39.06it/s]1501it [02:21, 10.58it/s]
+
+Training iteration: 3/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:37, 40.38it/s]              1501it [00:50, 40.38it/s]1501it [02:20, 10.67it/s]
+
+Training iteration: 4/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:40, 37.30it/s]              1501it [01:00, 37.30it/s]1501it [02:21, 10.62it/s]
+
+Training iteration: 5/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:38, 38.93it/s]              1501it [00:48, 38.93it/s]1501it [02:05, 11.94it/s]
+
+Training iteration: 6/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:44, 33.52it/s]              1501it [01:03, 33.52it/s]1501it [02:09, 11.60it/s]
+
+Training iteration: 7/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:36, 41.22it/s]              1501it [00:54, 41.22it/s]1501it [02:04, 12.09it/s]
+
+Training iteration: 8/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:37, 40.17it/s]              1501it [00:50, 40.17it/s]1501it [01:39, 15.05it/s]
+
+Training iteration: 9/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:51, 28.94it/s]              1501it [01:10, 28.94it/s]1501it [02:34,  9.72it/s]
+
+Training iteration: 10/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:51, 29.23it/s]              1501it [01:06, 29.23it/s]1501it [02:39,  9.40it/s]
+Finished run with hyperparameters critic_hidden_size:[32, 64, 32]_policy_hidden_size:[64, 256, 64]. Mean final score: 204.40926242311627 +- 24.86798936429725
+
+Starting new run...
+
+Training iteration: 1/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:50, 29.85it/s]              1501it [01:07, 29.85it/s]1501it [02:21, 10.62it/s]
+Saving to:  racetrack_latest.pt
+
+Training iteration: 2/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:39, 37.96it/s]              1501it [00:55, 37.96it/s]1501it [01:18, 19.01it/s]
+
+Training iteration: 3/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:53, 28.04it/s]              1501it [01:07, 28.04it/s]1501it [03:14,  7.71it/s]
+
+Training iteration: 4/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:52, 28.66it/s]              1501it [01:02, 28.66it/s]1501it [01:59, 12.59it/s]
+
+Training iteration: 5/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:52, 28.67it/s]              1501it [01:03, 28.67it/s]1501it [02:05, 12.00it/s]
+
+Training iteration: 6/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:36, 40.89it/s]              1501it [00:48, 40.89it/s]1501it [01:29, 16.68it/s]
+
+Training iteration: 7/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:44, 33.62it/s]              1501it [00:58, 33.62it/s]1501it [03:14,  7.72it/s]
+
+Training iteration: 8/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:53, 28.30it/s]              1501it [01:04, 28.30it/s]1501it [03:22,  7.41it/s]
+
+Training iteration: 9/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:40, 36.74it/s]              1501it [00:52, 36.74it/s]1501it [02:43,  9.21it/s]
+
+Training iteration: 10/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:39, 38.44it/s]              1501it [00:49, 38.44it/s]1501it [01:16, 19.61it/s]
+Finished run with hyperparameters critic_hidden_size:[32, 128, 32]_policy_hidden_size:[128, 256, 128]. Mean final score: 199.66294510440474 +- 28.47579314806812
+
+Starting new run...
+
+Training iteration: 1/10
+  0%|          | 0/200 [00:00<?, ?it/s]1501it [00:57, 25.93it/s]              1501it [01:13, 25.93it/s]1501it [04:06,  6.09it/s]
+Saving to:  racetrack_latest.pt
+
+Training iteration: 2/10
+  0%|          | 0/200 [00:00<?, ?it/s]  0%|          | 0/200 [00:01<?, ?it/s]
+Traceback (most recent call last):
+  File "C:\Users\David KRAME\OneDrive - University of Edinburgh\000_EDINBURGH_COURSES\SECOND_SEMESTER\Reinforcement Learning\ASSIGNMENT\RL_Assignment_Sols\rl2025-coursework\rl2025\exercise4\train_ddpg.py", line 225, in <module>
+    env = gym.make(CONFIG["env"])
+                                  
+  File "C:\Users\David KRAME\OneDrive - University of Edinburgh\000_EDINBURGH_COURSES\SECOND_SEMESTER\Reinforcement Learning\ASSIGNMENT\RL_Assignment_Sols\rl2025-coursework\rl2025\exercise4\train_ddpg.py", line 130, in train
+    episode_timesteps, ep_return, ep_data = play_episode(
+                                            ^^^^^^^^^^^^^
+  File "C:\Users\David KRAME\OneDrive - University of Edinburgh\000_EDINBURGH_COURSES\SECOND_SEMESTER\Reinforcement Learning\ASSIGNMENT\RL_Assignment_Sols\rl2025-coursework\rl2025\exercise4\train_ddpg.py", line 66, in play_episode
+    nobs, reward, terminated, truncated, _ = env.step(action)
+                                             ^^^^^^^^^^^^^^^^
+  File "C:\Users\David KRAME\AppData\Local\Programs\Python\Python312\Lib\site-packages\gymnasium\wrappers\common.py", line 393, in step
+    return super().step(action)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\David KRAME\AppData\Local\Programs\Python\Python312\Lib\site-packages\gymnasium\core.py", line 322, in step
+    return self.env.step(action)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\David KRAME\AppData\Local\Programs\Python\Python312\Lib\site-packages\gymnasium\wrappers\common.py", line 285, in step
+    return self.env.step(action)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\David KRAME\AppData\Local\Programs\Python\Python312\Lib\site-packages\highway_env\envs\common\abstract.py", line 242, in step
+    obs = self.observation_type.observe()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\David KRAME\AppData\Local\Programs\Python\Python312\Lib\site-packages\highway_env\envs\common\observation.py", line 400, in observe
+    self.fill_road_layer_by_lanes(layer)
+  File "C:\Users\David KRAME\AppData\Local\Programs\Python\Python312\Lib\site-packages\highway_env\envs\common\observation.py", line 478, in fill_road_layer_by_lanes
+    cell = self.pos_to_index(lane.position(waypoint, 0))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\David KRAME\AppData\Local\Programs\Python\Python312\Lib\site-packages\highway_env\envs\common\observation.py", line 432, in pos_to_index
+    int(np.floor((position[0] - self.grid_size[0, 0]) / self.grid_step[0])),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+^C

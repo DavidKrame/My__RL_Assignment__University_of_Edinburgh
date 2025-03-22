@@ -211,12 +211,26 @@ class DDPG(Agent):
         
         states, actions, next_states, rewards, dones  = batch
         # Conversions
-        # actions = torch.FloatTensor(actions).unsqueeze(1)
-        states = torch.tensor(states, dtype=torch.float32)
-        actions = torch.tensor(actions, dtype=torch.float32)
-        rewards = torch.tensor(rewards, dtype=torch.float32).unsqueeze(1)
-        next_states = torch.tensor(next_states, dtype=torch.float32)
-        dones = torch.tensor(dones, dtype=torch.float32).unsqueeze(1)
+        """
+            THIS ELIMINATE A BIG WARNING BUT I SHOULD INSPECT THE VALIDITY
+        """
+        # states = states.clone().detach().float()
+        # actions = actions.clone().detach().float()
+        # rewards = rewards.clone().detach().float().unsqueeze(1)
+        # next_states = next_states.clone().detach().float()
+        # dones = dones.clone().detach().float().unsqueeze(1)
+        states = states.clone().detach().float()
+        actions = actions.clone().detach().float()
+        rewards = rewards.clone().detach().float().view(-1, 1)  # ensure shape is [batch_size, 1]
+        next_states = next_states.clone().detach().float()
+        dones = dones.clone().detach().float().view(-1, 1)      # ensure shape is [batch_size, 1]
+
+        # # actions = torch.FloatTensor(actions).unsqueeze(1)
+        # states = torch.tensor(states, dtype=torch.float32)
+        # actions = torch.tensor(actions, dtype=torch.float32)
+        # rewards = torch.tensor(rewards, dtype=torch.float32).unsqueeze(1)
+        # next_states = torch.tensor(next_states, dtype=torch.float32)
+        # dones = torch.tensor(dones, dtype=torch.float32).unsqueeze(1)
 
         # -----###### Critic update ######-----
         # next actions computation
@@ -232,7 +246,12 @@ class DDPG(Agent):
         # Q-values from the critic network
         current_inputs = torch.cat([states, actions], dim=1)
         current_q_values = self.critic(current_inputs)
+        """
+            THIS ELIMINATE A BIG WARNING BUT I SHOULD INSPECT THE VALIDITY (PROBABLY DEALING WITH BATCHES)
+        """
+        # target = target[-1,:,:]
         q_loss = F.mse_loss(current_q_values, target)  # critic MSE loss
+
 
         self.critic_optim.zero_grad()
         q_loss.backward()

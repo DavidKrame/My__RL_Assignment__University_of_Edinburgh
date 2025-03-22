@@ -154,6 +154,7 @@ class DQN(Agent):
         # ############################################# #
         self.learning_rate = learning_rate
         self.update_counter = 0
+        self.last_timestep = 0 ############################################################################
         self.target_update_freq = target_update_freq
         self.batch_size = batch_size
         self.gamma = gamma
@@ -214,14 +215,30 @@ class DQN(Agent):
                 new_epsilon = self.epsilon_min
             return new_epsilon
 
+        # def epsilon_exponential_decay(*args, **kwargs):
+        #     ### PUT YOUR CODE HERE ###
+        #     # raise(NotImplementedError)
+        #     ratio = timestep / max_timestep
+        #     new_epsilon = self.epsilon_start * (self.epsilon_exponential_decay_factor ** ratio)
+        #     if new_epsilon < self.epsilon_min:
+        #         new_epsilon = self.epsilon_min
+        #     return new_epsilon
         def epsilon_exponential_decay(*args, **kwargs):
-            ### PUT YOUR CODE HERE ###
-            # raise(NotImplementedError)
-            ratio = timestep / max_timestep
-            new_epsilon = self.epsilon_start * (self.epsilon_exponential_decay_factor ** ratio)
-            if new_epsilon < self.epsilon_min:
-                new_epsilon = self.epsilon_min
+            # Initialize last_timestep if not set
+            if not hasattr(self, 'last_timestep'):
+                self.last_timestep = 0
+            # Compute how many timesteps have passed since the last update
+            delta_timestep = timestep - self.last_timestep
+            # Compute the fraction of total timesteps this delta represents
+            ratio = delta_timestep / max_timestep
+            # Update epsilon recursively: use previous epsilon multiplied by the decay factor raised to the computed ratio
+            new_epsilon = self.epsilon * (self.epsilon_exponential_decay_factor ** ratio)
+            # Ensure epsilon does not fall below the minimum value
+            new_epsilon = max(new_epsilon, self.epsilon_min)
+            # Update the last timestep marker for the next call
+            self.last_timestep = timestep
             return new_epsilon
+
         
 
         if self.epsilon_decay_strategy == "constant":
@@ -350,7 +367,7 @@ class DiscreteRL(Agent):
         observation_space: gym.Space,
         gamma: float = 0.99,
         epsilon: float = 0.05,
-        learning_rate: float = 2e-4,
+        learning_rate: float = 1e-2,
         **kwargs
     ):
         """Constructor of DiscreteRL agent
