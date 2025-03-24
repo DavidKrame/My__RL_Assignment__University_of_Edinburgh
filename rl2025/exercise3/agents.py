@@ -224,22 +224,13 @@ class DQN(Agent):
         #         new_epsilon = self.epsilon_min
         #     return new_epsilon
         def epsilon_exponential_decay(*args, **kwargs):
-            # Initialize last_timestep if not set
-            if not hasattr(self, 'last_timestep'):
-                self.last_timestep = 0
-            # Compute how many timesteps have passed since the last update
-            delta_timestep = timestep - self.last_timestep
-            # Compute the fraction of total timesteps this delta represents
-            ratio = delta_timestep / max_timestep
-            # Update epsilon recursively: use previous epsilon multiplied by the decay factor raised to the computed ratio
-            new_epsilon = self.epsilon * (self.epsilon_exponential_decay_factor ** ratio)
-            # Ensure epsilon does not fall below the minimum value
+            ### PUT YOUR CODE HERE ###
+            # raise(NotImplementedError)
+            new_epsilon = self.epsilon * (self.epsilon_exponential_decay_factor ** (timestep / max_timestep))
             new_epsilon = max(new_epsilon, self.epsilon_min)
-            # Update the last timestep marker for the next call
-            self.last_timestep = timestep
-            return new_epsilon
-
-        
+            self.epsilon = new_epsilon
+            
+            return new_epsilon        
 
         if self.epsilon_decay_strategy == "constant":
             pass

@@ -1,2 +1,3 @@
-from rl2025.exercise4.agents import DDPG
-from rl2025.exercise3.replay import ReplayBuffer
+from rl2025.exercise5.agents import DQNModified
+from rl2025.exercise5.replay import ReplayBuffer
+from rl2025.util.hparam_sweeping import generate_hparam_configs

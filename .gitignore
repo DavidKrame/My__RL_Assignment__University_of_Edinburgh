@@ -1,6 +1,12 @@
-# Ignore all __pycache__ directories and Stored
+# Ignore all __pycache__ directories at any depth
 __pycache__/
 **/__pycache__/
+**/__pycache__/*
 
-*.pt
-**/*.pt
+# # Ignore all .pkl files at any depth
+# *.pkl
+# **/*.pkl
+
+# # Ignore all .pt files at any depth
+# *.pt
+# **/*.pt
