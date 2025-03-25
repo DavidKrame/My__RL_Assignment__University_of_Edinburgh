@@ -324,22 +324,40 @@ class DQNModified(Agent):
         if not hasattr(self, 'update_counter'):
             self.update_counter = 0
 
-        states, actions, next_states, rewards, dones = batch
+        # states, actions, next_states, rewards, dones = batch
         
+        # states = torch.FloatTensor(states)
+        # actions = torch.LongTensor(actions).unsqueeze(1)
+        # rewards = torch.FloatTensor(rewards).unsqueeze(1)
+        # dones = torch.FloatTensor(dones).unsqueeze(1)
+        # next_states = torch.FloatTensor(next_states)
+        
+        # # current Q-values for all actions using the critics network
+        # current_q_values = self.critics_net(states)
+        
+        # current_q = current_q_values.gather(1, actions)
+        
+        # max_current_q, _ = torch.max(current_q_values, dim=1, keepdim=True)
+        
+        # Unpack the batch of transitions : "states", "actions", "next_states", "rewards", "done"
+        states, actions, next_states, rewards, dones  = batch
+        # Conversions
+        # actions = torch.FloatTensor(actions).unsqueeze(1)
         states = torch.FloatTensor(states)
-        actions = torch.LongTensor(actions).unsqueeze(1)
+        actions = torch.FloatTensor(actions)
         rewards = torch.FloatTensor(rewards).unsqueeze(1)
         dones = torch.FloatTensor(dones).unsqueeze(1)
         next_states = torch.FloatTensor(next_states)
         
-        # current Q-values for all actions using the critics network
+        # After these conversion let us compute the current Q-values using critics_net
         current_q_values = self.critics_net(states)
-        
+        actions = actions.long()
         current_q = current_q_values.gather(1, actions)
         
-        max_current_q, _ = torch.max(current_q_values, dim=1, keepdim=True)
-        
+        # max_current_q, _ = torch.max(current_q_values, dim=1, keepdim=True)
         with torch.no_grad():
+            max_current_q, _ = current_q.max(dim=1, keepdim=True)
+            
             next_q_values = self.critics_target(next_states)
             max_next_q, _ = next_q_values.max(dim=1, keepdim=True)
             
