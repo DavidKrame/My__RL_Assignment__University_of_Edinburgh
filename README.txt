@@ -2,6 +2,13 @@
                     CHANGES I MADE AND DETAILS IMPORTANT TO MENTION
                     ------------------------------------------------
 
+Q1:
+---
+    - I just modified the following lines in the MDP example provided in "/exercise1/mdp_solver.py" :
+        Transition("land", "jump0", "land", 1, -1),
+        Transition("land", "jump1", "land", 1, -1),
+     My modifications helped to enforce "stay" for LAND and punish other unproductive options when in that state.
+
 Q2:
 ---
     - I made changes in "util/result_processing.py" and at corresponding lines that call it in
