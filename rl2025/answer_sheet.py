@@ -17,7 +17,7 @@ def question2_1() -> str:
     b) 0.8
     return: (str): your answer as a string. accepted strings: "a" or "b"
     """
-    answer = ""  # TYPE YOUR ANSWER HERE "a" or "b"
+    answer = "a"  # TYPE YOUR ANSWER HERE "a" or "b"
     return answer
 
 
@@ -29,7 +29,7 @@ def question2_2() -> str:
     b) 0.8
     return: (str): your answer as a string. accepted strings: "a" or "b"
     """
-    answer = ""  # TYPE YOUR ANSWER HERE "a" or "b"
+    answer = "a"  # TYPE YOUR ANSWER HERE "a" or "b"
     return answer
 
 
@@ -42,7 +42,7 @@ def question2_3() -> str:
     b) Every-Visit Monte Carlo
     return: (str): your answer as a string. accepted strings: "a" or "b"
     """
-    answer = ""  # TYPE YOUR ANSWER HERE "a" or "b"
+    answer = "b"  # TYPE YOUR ANSWER HERE "a" or "b"
     return answer
 
 
@@ -53,7 +53,7 @@ def question2_4() -> str:
     by [Q-learning / Every-Visit Monte Carlo] when compared to the other algorithm.
     return: answer (str): your answer as a string (100 words max)
     """
-    answer = ""  # TYPE YOUR ANSWER HERE (100 words max)
+    answer = "I think the change impacts Monte Carlo every-visit more because it is applied over the entire episode, which influences the aggregated return significantly more than in Q-learning. Changing gamma as we did for example, in Monte Carlo methods even a slight adjustment alters the cumulative sum of rewards by affecting every step in the trajectory. But, in Q-learning, gamma applies only to the immediate next states maximum Q-value, limiting its influence to just one lookahead step."  # TYPE YOUR ANSWER HERE (100 words max)
     return answer
 
 def question2_5() -> str:
@@ -63,7 +63,7 @@ def question2_5() -> str:
     by [Q-learning / Every-Visit Monte Carlo].
     return: answer (str): your answer as a string (100 words max)
     """
-    answer = ""  # TYPE YOUR ANSWER HERE (100 words max)
+    answer = "In the FrozenLake environment we used, the slippery version introduces randomness in the moves (meaning the agent might not act as intended or go in the intended direction) while the non-slippery version is deterministic. Consequently, the slippery version is more challenging. Our experiments revealed that Q-Learning handles randomness well, but surprisingly Monte Carlo outperforms it in the predictable (much simpler, non-slippery) setup, where Q-Learning sometimes got stuck in suboptimal moves (due to its max choice probably)."  # TYPE YOUR ANSWER HERE (100 words max)
     return answer
 
 
@@ -80,7 +80,7 @@ def question3_1() -> str:
     c) 2e-4
     return: (str): your answer as a string. accepted strings: "a", "b" or "c"
     """
-    answer = ""  # TYPE YOUR ANSWER HERE "a", "b" or "c"
+    answer = "a"  # TYPE YOUR ANSWER HERE "a", "b" or "c"
     return answer
 
 
@@ -94,7 +94,7 @@ def question3_2() -> str:
     c) 0.01
     return: (str): your answer as a string. accepted strings: "a", "b" or "c"
     """
-    answer = ""  # TYPE YOUR ANSWER HERE "a", "b" or "c"
+    answer = "c"  # TYPE YOUR ANSWER HERE "a", "b" or "c"
     return answer
 
 
@@ -108,7 +108,7 @@ def question3_3() -> str:
     c) 1e-5
     return: (str): your answer as a string. accepted strings: "a", "b" or "c"
     """
-    answer = ""  # TYPE YOUR ANSWER HERE "a", "b" or "c"
+    answer = "c"  # TYPE YOUR ANSWER HERE "a", "b" or "c"
     return answer
 
 
@@ -124,7 +124,7 @@ def question3_4() -> str:
     e) it depends on the number of training timesteps
     return: (str): your answer as a string. accepted strings: "a", "b", "c", "d" or "e"
     """
-    answer = ""  # TYPE YOUR ANSWER HERE "a", "b", "c", "d" or "e"
+    answer = "f:Unchanged:epsilon_start"  # TYPE YOUR ANSWER HERE "a", "b", "c", "d" or "e"
     return answer
 
 
@@ -140,7 +140,7 @@ def question3_5() -> str:
     e) it depends on the number of training timesteps
     return: (str): your answer as a string. accepted strings: "a", "b", "c", "d" or "e"
     """
-    answer = ""  # TYPE YOUR ANSWER HERE "a", "b", "c", "d" or "e"
+    answer = "e"  # TYPE YOUR ANSWER HERE "a", "b", "c", "d" or "e"
     return answer
 
 
@@ -153,7 +153,7 @@ def question3_6() -> str:
     strategy you implemented).
     return: answer (str): your answer as a string (100 words max)
     """
-    answer = ""  # TYPE YOUR ANSWER HERE (100 words max)
+    answer = "I think linear decay is more adaptable to different environments because its decay is more closely tied to the maximum training duration than exponential decay, which is based on a fixed rate that controls much of the process and can decay more quickly or slowly just by setting that rate, regardless of the total training time."  # TYPE YOUR ANSWER HERE (100 words max)
     return answer
 
 
@@ -164,7 +164,7 @@ def question3_7() -> str:
     (where we usually see a fairly steady decrease of the loss throughout training)
     return: answer (str): your answer as a string (150 words max)
     """
-    answer = ""  # TYPE YOUR ANSWER HERE (150 words max)
+    answer = "In DQN, we saw, the loss function measures the difference between predicted and target Q-values. Unlike supervised learning, where loss just decreases steadily due to a fixed dataset, DQNs loss fluctuates because the agent continuously gathers new experiences and in our case a replay buffer was used, leading to a very non-stationary dataset, with this constant sampling. Additionally, as suggested by the DQN paper, the target networks in DQN update periodically, not every time, causing shifts in target values and contributing to loss variability. Thus, the loss patterns don't exhibit the steady decline seen in supervised learning scenarios and, in fact, don't have the same significance. In RL, these kind of losses serves almost just as a guide before a new target update."  # TYPE YOUR ANSWER HERE (150 words max)
     return answer
 
 
@@ -175,7 +175,7 @@ def question3_8() -> str:
     the DQN training process.
     return: answer (str): your answer as a string (100 words max)
     """
-    answer = ""  # TYPE YOUR ANSWER HERE (100 words max)
+    answer = "The spikes in the image (see the assignment sheet), which occur at almost regular intervals during DQN training, are due to the periodic updates of the target network. In DQN, the target network is updated less frequently than the main Q-network to stabilize learning, and this leads to those spikes."  # TYPE YOUR ANSWER HERE (100 words max)
     return answer
 
 
@@ -190,5 +190,22 @@ def question5_1() -> str:
     the best performance of your agents
     return: answer (str): your answer as a string (200 words max)
     """
-    answer = ""  # TYPE YOUR ANSWER HERE (200 words max)
+    # answer = """
+    #     Wanting to improve the mean final scores in Q3, I made changes in the Bellman update of the DQN algorithm.
+    #     The changes are inspired by the theoretical analysis I did in point 5.1.3 of my document on the 
+    #     "Topological Foundations of Reinforcement Learning" (https://arxiv.org/pdf/2410.03706). In that
+    #     document I was just exploring well-known results but in a much more mathematically clear way before
+    #      going beyond but without neural-networks like for this assignment.
+    #     I introduced a topological correction term to penalize the discrepancy between the expected 
+    #     Q-value and the Q-value corresponding to the chosen action. For the particular case of this assignment,
+    #     I defined this term as:correction =  beta x (max_current_q - current_q), with  beta decaying as 
+    #      1/((iteration + 2)^2).
+    #     See the function description in the code but the idea is to study near-optimal but simple Bellman
+    #      operators theoretically (proof of convergence) and then say something empirically too. 
+    #     I did empirical tests here too (using a constant epsilon of 0.05 over 10 trials) and got a mean final score 
+    #      of -121.11 ± 4.13, compared to -131.11 ± 3.93 for the classical DQN, that we got in Q3, 
+    #     demonstrating both improved performance and enhanced training stability (see files in Q5 folder).
+    # """  # TYPE YOUR ANSWER HERE (200 words max)
+    answer = "Wanting to improve the mean final scores in Q3, I made changes in the Bellman Operator in general. The changes are inspired by the theoretical analysis I did in point 5.1.3 of my work on the 'Topological Foundations of Reinforcement Learning' (https://arxiv.org/pdf/2410.03706). In that document I was just exploring well-known results but in a much more mathematically clear way before going beyond but without neural-networks like for this assignment. I introduced a topological correction term to penalize the discrepancy between the expected Q-value and the Q-value corresponding to the chosen action. For the particular case of this assignment, I defined this term as: correction =  beta x (max_current_q - current_q), with  beta decaying as 1/((iteration + 2)^2). See the function description in the code but the idea is to study near-optimal and simple Bellman Operators theoretically (proof of convergence) and then say something empirically too. I did empirical tests here too (using a constant epsilon of 0.05 over 10 trials) and got a mean final score of -121.11 (err=4.13), compared to -131.11 (err=3.93) for the classical DQN, demonstrating both improved performance and enhanced training stability (see terminal output in Q5 folder)."
+    
     return answer

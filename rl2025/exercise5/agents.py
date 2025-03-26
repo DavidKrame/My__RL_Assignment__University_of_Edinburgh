@@ -59,7 +59,7 @@ class Agent(ABC):
         """
         dirname, _ = os.path.split(os.path.abspath(__file__))
         save_path = os.path.join(dirname, save_path)
-        checkpoint = torch.load(save_path)
+        checkpoint = torch.load(save_path, weights_only=False)
         for k, v in self.saveables.items():
             v.load_state_dict(checkpoint[k].state_dict())
 
@@ -324,21 +324,6 @@ class DQNModified(Agent):
         if not hasattr(self, 'update_counter'):
             self.update_counter = 0
 
-        # states, actions, next_states, rewards, dones = batch
-        
-        # states = torch.FloatTensor(states)
-        # actions = torch.LongTensor(actions).unsqueeze(1)
-        # rewards = torch.FloatTensor(rewards).unsqueeze(1)
-        # dones = torch.FloatTensor(dones).unsqueeze(1)
-        # next_states = torch.FloatTensor(next_states)
-        
-        # # current Q-values for all actions using the critics network
-        # current_q_values = self.critics_net(states)
-        
-        # current_q = current_q_values.gather(1, actions)
-        
-        # max_current_q, _ = torch.max(current_q_values, dim=1, keepdim=True)
-        
         # Unpack the batch of transitions : "states", "actions", "next_states", "rewards", "done"
         states, actions, next_states, rewards, dones  = batch
         # Conversions
@@ -364,7 +349,7 @@ class DQNModified(Agent):
         # the decaying beta now (beta decreases over time)
         beta = 1.0 / ((self.update_counter + 2) ** 2)
         
-        # topological correction term according
+        # topological correction term according to my theoretical investigations
         topo_correction = beta * (max_current_q - current_q)
         
         # My proposed target: classical target - topo_correction

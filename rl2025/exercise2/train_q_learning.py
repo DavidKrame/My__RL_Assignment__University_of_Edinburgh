@@ -10,7 +10,7 @@ import numpy as np
 from rl2025.util.result_processing import Run, get_best_saved_run
 
 
-HYPERPARAM_SWEEP = True  # False to run only the default CONFIG parameters
+HYPERPARAM_SWEEP = False  # False to run only the default CONFIG parameters
 IS_SLIPPERY = True
 
 CONFIG = {
@@ -120,7 +120,7 @@ if __name__ == "__main__":
     # total_reward, _, _, q_table = train(env, CONFIG)
         
     if not HYPERPARAM_SWEEP:  #Default
-        env = gym.make(CONFIG, is_slippery=IS_SLIPPERY)
+        env = gym.make(CONFIG["env"], is_slippery=IS_SLIPPERY)
         total_reward, eval_return_means, _, q_table = train(env, CONFIG)
         env.close()
         mean_value = eval_return_means[-1] if eval_return_means else None

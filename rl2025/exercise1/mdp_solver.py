@@ -182,7 +182,7 @@ class PolicyIteration(MDPSolver):
         # raise NotImplementedError("Needed for Q1")
         
         while True:
-            Delta = 0
+            Delta = 0  # I'm following almost Sutton's pseudo-code
             new_V = np.zeros(self.state_dim)
             for s in range(self.state_dim):
                 new_val = 0.0
@@ -222,7 +222,7 @@ class PolicyIteration(MDPSolver):
         # raise NotImplementedError("Needed for Q1")
         
         for s in range(self.state_dim):
-            policy[s, 0] = 1.0 # NOTA : This is just a random init. Allowing the algo to start somewhere
+            policy[s, 0] = 1.0 # NOTA : This is just a random init. Allowing the algo to start somewhere but with SUM=1
         policy_stable = False # A small deviation from the TRUE given in the book but this help us make the code easier
         while not policy_stable:
             V = self._policy_eval(policy)
@@ -278,7 +278,7 @@ if __name__ == "__main__":
         Transition("rock1", "jump1", "land", 0.9, 10),
         Transition("rock1", "stay", "rock1", 1, 0),
         Transition("land", "stay", "land", 1, 0),
-        Transition("land", "jump0", "land", 1, -1), # Modif here and the next to enforce stay for LAND and punish other options
+        Transition("land", "jump0", "land", 1, -1), # My modifs (here and the next) to enforce "stay" for LAND and punish other unproductive options
         Transition("land", "jump1", "land", 1, -1),
     )
 

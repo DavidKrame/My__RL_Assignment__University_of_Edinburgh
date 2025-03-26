@@ -146,7 +146,7 @@ class DDPG(Agent):
         if dir_path is None:
             dir_path = os.getcwd()
         save_path = os.path.join(dir_path, filename)
-        checkpoint = torch.load(save_path)
+        checkpoint = torch.load(save_path, weights_only=False)
         for k, v in self.saveables.items():
             v.load_state_dict(checkpoint[k].state_dict())
 

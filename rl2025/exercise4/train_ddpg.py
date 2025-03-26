@@ -18,23 +18,27 @@ from rl2025.util.hparam_sweeping import generate_hparam_configs
 from rl2025.util.result_processing import Run
 
 RENDER = False # FALSE FOR FASTER TRAINING / TRUE TO VISUALIZE ENVIRONMENT DURING EVALUATION
-SWEEP = True # TRUE TO SWEEP OVER POSSIBLE HYPERPARAMETER CONFIGURATIONS
+SWEEP = False # TRUE TO SWEEP OVER POSSIBLE HYPERPARAMETER CONFIGURATIONS
 NUM_SEEDS_SWEEP = 10 # NUMBER OF SEEDS TO USE FOR EACH HYPERPARAMETER CONFIGURATION
 SWEEP_SAVE_RESULTS = True # TRUE TO SAVE SWEEP RESULTS TO A FILE
-SWEEP_SAVE_ALL_WEIGTHS = False # TRUE TO SAVE ALL WEIGHTS FROM EACH SEED
+SWEEP_SAVE_ALL_WEIGTHS = True # TRUE TO SAVE ALL WEIGHTS FROM EACH SEED
 ENV = "RACETRACK"
 
+# RACETRACK_CONFIG = {
+#     "critic_hidden_size": [32, 64, 32],
+#     "policy_hidden_size": [32, 64, 32],
+# }
 RACETRACK_CONFIG = {
-    "critic_hidden_size": [32, 64, 32],
-    "policy_hidden_size": [32, 64, 32],
+    "critic_hidden_size": [32, 64, 128, 64, 32],
+    "policy_hidden_size": [32, 64, 128, 128, 64, 32],
 }
 RACETRACK_CONFIG.update(RACETRACK_CONSTANTS)
 
 
 ### INCLUDE YOUR CHOICE OF HYPERPARAMETERS HERE ###
 RACETRACK_HPARAMS = {
-    "critic_hidden_size": ...,
-    "policy_hidden_size": ...,
+    "critic_hidden_size": [32, 64, 128, 64, 32],
+    "policy_hidden_size": [32, 64, 128, 128, 64, 32],
     }
 
 SWEEP_RESULTS_FILE_RACETRACK = "DDPG-Racetrack-sweep-results-ex4.pkl"
@@ -201,15 +205,16 @@ if __name__ == "__main__":
         #     ]
         # }
 
-        # LAST TEST
+        # LAST TEST ::: BEST == critic_hidden_size:[32, 64, 32]_policy_hidden_size:[32, 64, 128, 64, 32]
+        ## EVEN BETTER BUT HEAVIER : critic_hidden_size:[32, 64, 128, 64, 32]_policy_hidden_size:[32, 64, 128, 128, 64, 32]. SCORE: 634.4767282700483 +- 68.06239531816013
         HPARAMS_SWEEP = {
             "critic_hidden_size": [
-                [32, 64, 32],
+                # [32, 64, 32],
                 [32, 64, 128, 64, 32]
             ],
             "policy_hidden_size": [
                 [32, 64, 128, 128, 64, 32],
-                [32, 64, 128, 64, 32]
+                # [32, 64, 128, 64, 32]
             ]
         }
 

@@ -59,7 +59,7 @@ class Agent(ABC):
         """
         dirname, _ = os.path.split(os.path.abspath(__file__))
         save_path = os.path.join(dirname, save_path)
-        checkpoint = torch.load(save_path)
+        checkpoint = torch.load(save_path, weights_only=False)
         for k, v in self.saveables.items():
             v.load_state_dict(checkpoint[k].state_dict())
 
@@ -209,20 +209,12 @@ class DQN(Agent):
             ### PUT YOUR CODE HERE ###
             # raise(NotImplementedError)
             decay_steps = self.exploration_fraction * max_timestep
-            if timestep < decay_steps:
+            if timestep < decay_steps: # here we are using a simple interpolation seen in the literature
                 new_epsilon = self.epsilon_start - (self.epsilon_start - self.epsilon_min) * (timestep / decay_steps)
             else:
                 new_epsilon = self.epsilon_min
             return new_epsilon
 
-        # def epsilon_exponential_decay(*args, **kwargs):
-        #     ### PUT YOUR CODE HERE ###
-        #     # raise(NotImplementedError)
-        #     ratio = timestep / max_timestep
-        #     new_epsilon = self.epsilon_start * (self.epsilon_exponential_decay_factor ** ratio)
-        #     if new_epsilon < self.epsilon_min:
-        #         new_epsilon = self.epsilon_min
-        #     return new_epsilon
         def epsilon_exponential_decay(*args, **kwargs):
             ### PUT YOUR CODE HERE ###
             # raise(NotImplementedError)
@@ -357,8 +349,8 @@ class DiscreteRL(Agent):
         action_space: gym.Space,
         observation_space: gym.Space,
         gamma: float = 0.99,
-        epsilon: float = 0.05,
-        learning_rate: float = 1e-2,
+        epsilon: float = 0.99,
+        learning_rate: float = 0.05,
         **kwargs
     ):
         """Constructor of DiscreteRL agent
@@ -479,6 +471,5 @@ class DiscreteRL(Agent):
         :param timestep (int): current timestep at the beginning of the episode
         :param max_timestep (int): maximum timesteps that the training loop will run for
         """
-        # decay_progress = min(1.0, timestep / (0.20 * max_timestep))
-        # self.epsilon = 1.0 - decay_progress * 0.99  # Decays from 1.0 to 0.01
-        pass
+        decay_progress = min(1.0, timestep / (0.20 * max_timestep))
+        self.epsilon = 1.0 - decay_progress * 0.99  # Decays from 1.0 to 0.01

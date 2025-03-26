@@ -1,129 +1,0 @@
-
-Starting new run...
-
-Training iteration: 1/10
-  0%|          | 0/200 [00:00<?, ?it/s]1501it [01:20, 18.68it/s]              1501it [01:40, 18.68it/s]1501it [04:05,  6.13it/s]
-Saving to:  racetrack_latest.pt
-
-Training iteration: 2/10
-  0%|          | 0/200 [00:00<?, ?it/s]1501it [01:15, 19.96it/s]              1501it [01:25, 19.96it/s]1501it [03:31,  7.08it/s]
-
-Training iteration: 3/10
-  0%|          | 0/200 [00:00<?, ?it/s]1501it [01:14, 20.20it/s]              1501it [01:33, 20.20it/s]1501it [02:57,  8.45it/s]
-
-Training iteration: 4/10
-  0%|          | 0/200 [00:00<?, ?it/s]1501it [01:08, 22.03it/s]              1501it [01:26, 22.03it/s]1501it [02:48,  8.90it/s]
-
-Training iteration: 5/10
-  0%|          | 0/200 [00:00<?, ?it/s]279it [00:12, 22.84it/s]               279it [00:28, 22.84it/s]279it [02:52,  1.62it/s]
-
-Training iteration: 6/10
-  0%|          | 0/200 [00:00<?, ?it/s]1501it [01:09, 21.55it/s]              1501it [01:26, 21.55it/s]1501it [02:18, 10.82it/s]
-
-Training iteration: 7/10
-  0%|          | 0/200 [00:00<?, ?it/s]1501it [01:08, 21.89it/s]              1501it [01:27, 21.89it/s]1501it [03:04,  8.14it/s]
-
-Training iteration: 8/10
-  0%|          | 0/200 [00:00<?, ?it/s]1501it [01:09, 21.56it/s]              1501it [01:23, 21.56it/s]1501it [02:48,  8.90it/s]
-
-Training iteration: 9/10
-  0%|          | 0/200 [00:00<?, ?it/s]1501it [01:08, 21.97it/s]              1501it [01:25, 21.97it/s]1501it [03:58,  6.30it/s]
-
-Training iteration: 10/10
-  0%|          | 0/200 [00:00<?, ?it/s]1501it [01:07, 22.10it/s]              1501it [01:27, 22.10it/s]1501it [03:54,  6.39it/s]
-Finished run with hyperparameters critic_hidden_size:[32, 64, 32]_policy_hidden_size:[32, 64, 32]. Mean final score: 229.16070115844758 +- 35.26853293009749
-
-Starting new run...
-
-Training iteration: 1/10
-  0%|          | 0/200 [00:00<?, ?it/s]335it [00:18, 18.50it/s]               335it [00:32, 18.50it/s]335it [00:52,  6.42it/s]
-Saving to:  racetrack_latest.pt
-
-Training iteration: 2/10
-  0%|          | 0/200 [00:00<?, ?it/s]1501it [01:12, 20.62it/s]              1501it [01:30, 20.62it/s]1501it [03:35,  6.95it/s]
-
-Training iteration: 3/10
-  0%|          | 0/200 [00:00<?, ?it/s]1501it [01:16, 19.62it/s]              1501it [01:35, 19.62it/s]1501it [05:27,  4.58it/s]
-
-Training iteration: 4/10
-  0%|          | 0/200 [00:00<?, ?it/s]1501it [02:10, 11.47it/s]              1501it [02:28, 11.47it/s]1501it [08:17,  3.01it/s]
-
-Training iteration: 5/10
-  0%|          | 0/200 [00:00<?, ?it/s]1501it [02:44,  9.10it/s]              1501it [04:30,  5.55it/s]
-
-Training iteration: 6/10
-  0%|          | 0/200 [00:00<?, ?it/s]1501it [02:10, 11.50it/s]              1501it [02:20, 11.50it/s]1501it [04:58,  5.02it/s]
-
-Training iteration: 7/10
-  0%|          | 0/200 [00:00<?, ?it/s]1501it [02:45,  9.09it/s]              1501it [07:46,  3.22it/s]
-
-Training iteration: 8/10
-  0%|          | 0/200 [00:00<?, ?it/s]1501it [02:10, 11.54it/s]              1501it [02:27, 11.54it/s]1501it [06:48,  3.67it/s]
-
-Training iteration: 9/10
-  0%|          | 0/200 [00:00<?, ?it/s]1501it [02:22, 10.56it/s]              1501it [02:39, 10.56it/s]1501it [09:29,  2.63it/s]
-
-Training iteration: 10/10
-  0%|          | 0/200 [00:00<?, ?it/s]1501it [02:15, 11.06it/s]              1501it [02:31, 11.06it/s]1501it [04:53,  5.12it/s]
-Finished run with hyperparameters critic_hidden_size:[32, 64, 32]_policy_hidden_size:[64, 256, 64]. Mean final score: 171.27472483711102 +- 25.49169323566895
-
-Starting new run...
-
-Training iteration: 1/10
-  0%|          | 0/200 [00:00<?, ?it/s]1501it [01:12, 20.57it/s]              1501it [01:28, 20.57it/s]1501it [03:45,  6.66it/s]
-Saving to:  racetrack_latest.pt
-
-Training iteration: 2/10
-  0%|          | 0/200 [00:00<?, ?it/s]1501it [02:08, 11.71it/s]              1501it [02:23, 11.71it/s]1501it [05:40,  4.40it/s]
-
-Training iteration: 3/10
-  0%|          | 0/200 [00:00<?, ?it/s]1501it [02:01, 12.37it/s]              1501it [02:13, 12.37it/s]1501it [04:14,  5.90it/s]
-
-Training iteration: 4/10
-  0%|          | 0/200 [00:00<?, ?it/s]1501it [02:38,  9.50it/s]              1501it [03:52,  6.46it/s]
-Traceback (most recent call last):
-  File "C:\Users\David KRAME\OneDrive - University of Edinburgh\000_EDINBURGH_COURSES\SECOND_SEMESTER\Reinforcement Learning\ASSIGNMENT\RL_Assignment_Sols\rl2025-coursework\rl2025\exercise4\train_ddpg.py", line 215, in <module>
-    eval_returns, eval_timesteps, times, run_data = train(env, env_eval, run.config, output=False)
-                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\David KRAME\OneDrive - University of Edinburgh\000_EDINBURGH_COURSES\SECOND_SEMESTER\Reinforcement Learning\ASSIGNMENT\RL_Assignment_Sols\rl2025-coursework\rl2025\exercise4\train_ddpg.py", line 150, in train
-    _, episode_return, _ = play_episode(
-                           ^^^^^^^^^^^^^
-  File "C:\Users\David KRAME\OneDrive - University of Edinburgh\000_EDINBURGH_COURSES\SECOND_SEMESTER\Reinforcement Learning\ASSIGNMENT\RL_Assignment_Sols\rl2025-coursework\rl2025\exercise4\train_ddpg.py", line 66, in play_episode
-    nobs, reward, terminated, truncated, _ = env.step(action)
-                                             ^^^^^^^^^^^^^^^^
-  File "C:\Users\David KRAME\AppData\Local\Programs\Python\Python312\Lib\site-packages\gymnasium\wrappers\common.py", line 393, in step
-    return super().step(action)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\David KRAME\AppData\Local\Programs\Python\Python312\Lib\site-packages\gymnasium\core.py", line 322, in step
-    return self.env.step(action)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\David KRAME\AppData\Local\Programs\Python\Python312\Lib\site-packages\gymnasium\wrappers\common.py", line 285, in step
-    return self.env.step(action)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\David KRAME\AppData\Local\Programs\Python\Python312\Lib\site-packages\highway_env\envs\common\abstract.py", line 242, in step
-    obs = self.observation_type.observe()
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\David KRAME\AppData\Local\Programs\Python\Python312\Lib\site-packages\highway_env\envs\common\observation.py", line 364, in observe
-    df = pd.DataFrame.from_records(
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\David KRAME\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 2491, in from_records
-    arrays, arr_columns = to_arrays(data, columns)
-                          ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\David KRAME\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\internals\construction.py", line 845, in to_arrays
-    content, columns = _finalize_columns_and_data(arr, columns, dtype)
-                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\David KRAME\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\internals\construction.py", line 945, in _finalize_columns_and_data
-    contents = convert_object_array(contents, dtype=dtype)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\David KRAME\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\internals\construction.py", line 1070, in convert_object_array
-    arrays = [convert(arr) for arr in content]
-              ^^^^^^^^^^^^
-  File "C:\Users\David KRAME\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\internals\construction.py", line 1030, in convert
-    arr = lib.maybe_convert_objects(
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "lib.pyx", line 2543, in pandas._libs.lib.maybe_convert_objects
-  File "C:\Users\David KRAME\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\_core\numeric.py", line 303, in full
-    @set_array_function_like_doc
-    
-KeyboardInterrupt
-^C

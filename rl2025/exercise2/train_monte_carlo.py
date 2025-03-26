@@ -9,8 +9,8 @@ from rl2025.util.result_processing import Run, get_best_saved_run
 import copy
 import numpy as np
 
-HYPERPARAM_SWEEP = True # False to run just with the default CONFIG parameters
-IS_SLIPPERY = False
+HYPERPARAM_SWEEP = False # False to run just with the default CONFIG parameters
+IS_SLIPPERY = True
 
 CONFIG = {
     "eval_freq": 5000, # keep this unchanged
