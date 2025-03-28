@@ -1,4 +1,5 @@
 README.md
+README.txt
 setup.py
 rl2025/__init__.py
 rl2025/answer_sheet.py
@@ -31,8 +32,11 @@ rl2025/exercise4/agents.py
 rl2025/exercise4/evaluate_ddpg.py
 rl2025/exercise4/train_ddpg.py
 rl2025/exercise5/__init__.py
-rl2025/exercise5/evaluate_ddpg.py
-rl2025/exercise5/train_ddpg.py
+rl2025/exercise5/agents.py
+rl2025/exercise5/evaluate_dqn.py
+rl2025/exercise5/networks.py
+rl2025/exercise5/replay.py
+rl2025/exercise5/train_dqn.py
 tests/test_answer_sheet_public.py
 tests/test_ex1_public.py
 tests/test_ex2_public.py
