@@ -213,14 +213,6 @@ class DQNModified(Agent):
                 new_epsilon = self.epsilon_min
             return new_epsilon
 
-         # def epsilon_exponential_decay(*args, **kwargs):
-        #     ### PUT YOUR CODE HERE ###
-        #     # raise(NotImplementedError)
-        #     ratio = timestep / max_timestep
-        #     new_epsilon = self.epsilon_start * (self.epsilon_exponential_decay_factor ** ratio)
-        #     if new_epsilon < self.epsilon_min:
-        #         new_epsilon = self.epsilon_min
-        #     return new_epsilon
         def epsilon_exponential_decay(*args, **kwargs):
             ### PUT YOUR CODE HERE ###
             # raise(NotImplementedError)
@@ -288,7 +280,7 @@ class DQNModified(Agent):
             # --------------------------------------------------------------------------------------------------
             We realized that classical Q-learning update rule often leads to suboptimal results, 
             requiring significant adjustments in hyperparameters to achieve satisfactory performance. 
-            To address these limitations, I propose a topology-inspired correction to the update mechanism. 
+            To address these limitations, I proposed a topology-inspired correction to the update mechanism. 
             This correction is based on the mathematical analysis of the Bellman Operator and
             the study of its modifications, as detailed in my work: 
             [Topological Foundations of Reinforcement Learning](https://arxiv.org/pdf/2410.03706).
@@ -297,23 +289,32 @@ class DQNModified(Agent):
                 target = reward + gamma * (1 - done) * max_next_q
 
             My proposed modification introduces a correction term that penalizes the discrepancy between 
-            the maximum Q-value at a state and the Q-value for the selected action. 
+            the maximum Q-value at a state and the Q-value for the selected action directly. 
             This correction encourages smoother Q-functions and better alignment with the underlying topology 
-            of the state–action space.
+            of the state–action space along the way.
 
-            The correction term is defined (for simplification here) as:
-                correction = beta * (max_current_q - current_q)
+            The correction term is defined (for simplification in this assignment) as:
+                correction = beta * (max_current_q_value - current_q_value)
 
             where beta is a decaying coefficient. To simplify here we took:
-                beta = 1 / ((update_counter + 2)^2)
+                beta = 1 / ((iteration + 2)^2)
+            
+            In our cited work above (https://arxiv.org/pdf/2410.03706), we provided a proof of convergence 
+             justifying this choice.
 
             As training progresses, beta decreases, reducing the influence of the correction term and 
             allowing the agent to fine-tune its policy based on accumulated experience.
             
             So, in essence, this modification integrates the concept of advantage learning directly into the 
-            Bellman operator. While this integration might initially seem counterintuitive, our theoretical 
-            analysis in the tabular case demonstrated that it leads to a well-behaved operator. 
-            Moreover, empirical implementations have confirmed that this approach yields improved results.
+            Bellman Operator. While this integration might initially seem counterintuitive, our theoretical 
+            analysis in the tabular case demonstrated that it leads to a well-behaving operator (we define this 
+             concept in the same work).
+             
+            Moreover, empirical implementations have confirmed that this approach yields improved results. 
+            Our goal here then was to determine whether these improvements persist even when using function 
+            approximation (for example, with Neural Networks as implemented in this assignment). 
+            In fact, during training in Question 3, we observed that the evolution was highly unstable, 
+            which led us to believe that our method might correct both the instability and improve the mean return.
             # --------------------------------------------------------------------------------------------------
             
             :param batch (Transition): A batch of transitions sampled from the replay buffer.
