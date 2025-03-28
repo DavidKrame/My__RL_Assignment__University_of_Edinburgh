@@ -3,9 +3,9 @@ __pycache__/
 **/__pycache__/
 **/__pycache__/*
 
-# # Ignore all .pkl files at any depth
-# *.pkl
-# **/*.pkl
+# Ignore all .pkl files at any depth
+*.pkl
+**/*.pkl
 
 # # Ignore all .pt files at any depth
 # *.pt
